@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.io.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.filechooser.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import javax.xml.parsers.*;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import java.net.*;
+import java.util.Scanner;
 
 public class GUI {
     /*GUI compoenents*/
@@ -41,7 +43,60 @@ public class GUI {
     private JEditorPane textEditor;
 
     public boolean isRecording = false;
+    public File selected;
+    public boolean isFileOpen = false;
 
+    /*Info Popup*/
+    public static void infoBox(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void openFile() {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Java Files", "java");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(openButton);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            selected = chooser.getSelectedFile();
+            isFileOpen = true;
+
+            try {
+                FileReader fileReader = new FileReader(selected);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                StringBuffer stringBuffer = new StringBuffer();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuffer.append(line);
+                    stringBuffer.append("\n");
+                }
+                fileReader.close();
+                textEditor.setText(stringBuffer.toString());
+            } catch (IOException ie) {
+                ie.printStackTrace();
+            }
+        }
+    }
+
+    public void saveFile() {
+        try {
+            String code = textEditor.getText();
+            PrintWriter printWriter = new PrintWriter(selected);
+            printWriter.print(code);
+            printWriter.close();
+            infoBox(selected + " was saved successfully", "Successful Save");
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        }
+    }
+
+    /*Grabs HTML from passed in URL*/
+    public void getHTML(String url) throws IOException {
+        URL u = new URL(url);
+        Scanner s = new Scanner(u.openStream());
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
 
     public GUI() throws IOException {
 
@@ -50,28 +105,37 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFileChooser chooser = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Java Files", "java");
-                chooser.setFileFilter(filter);
-                int returnVal = chooser.showOpenDialog(openButton);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File selected = chooser.getSelectedFile();
-
-                    try {
-                        FileReader fileReader = new FileReader(selected);
-                        BufferedReader bufferedReader = new BufferedReader(fileReader);
-                        StringBuffer stringBuffer = new StringBuffer();
-                        String line;
-                        while ((line = bufferedReader.readLine()) != null) {
-                            stringBuffer.append(line);
-                            stringBuffer.append("\n");
-                        }
-                        fileReader.close();
-                        textEditor.setText(stringBuffer.toString());
-                    } catch (IOException ie) {
-                        ie.printStackTrace();
+                if (!isFileOpen) {
+                    openFile();
+                } else {
+                    int dialogChoice = JOptionPane.showConfirmDialog(null, "There is already an open file, would you like to save it before opening another?", "File already open", JOptionPane.YES_NO_OPTION);
+                    if (dialogChoice == JOptionPane.YES_OPTION) {
+                        saveFile();
+                        openFile();
+                    } else {
+                        openFile();
                     }
                 }
+            }
+        });
+
+        /*Saves the java file that is currently open*/
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isFileOpen) {
+                    saveFile();
+                } else {
+                    infoBox("There is no file currently open", "Save Unsuccessful");
+                }
+            }
+        });
+
+        /*Starts a new file*/
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
 
@@ -110,7 +174,7 @@ public class GUI {
         });
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SAXException {
         JFrame mainFrame = new JFrame("Selenium IDE");
         mainFrame.setContentPane(new GUI().mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
