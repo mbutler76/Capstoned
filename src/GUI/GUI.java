@@ -43,10 +43,14 @@ public class GUI {
     private JPanel editorPane;
     private JEditorPane pictureEditorPane;
     private JEditorPane textEditor;
+    private JTextField urlTextField;
+    private JButton refreshURLButton;
 
     public boolean isRecording = false;
     public File selected;
     public boolean isFileOpen = false;
+    private static View view;
+    private static Browser browser;
 
     /*Info Popup*/
     public static void infoBox(String infoMessage, String titleBar) {
@@ -101,11 +105,6 @@ public class GUI {
     }
 
     public GUI() throws IOException {
-
-        /*JFXPanel fxPanel = new JFXPanel();
-        View view = new View();
-        fxPanel.setScene(view.scene);
-        googleChromeEditorPane.add(fxPanel);*/
 
         /*Opens a java file in the editor pane*/
         openButton.addActionListener(new ActionListener() {
@@ -170,13 +169,10 @@ public class GUI {
             }
         });
 
-        googleChromeEditorPane.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //super.mouseClicked(e);
-                if (isRecording) {
-                    System.out.println("GUI.Browser clicked");
-                }
+        /*Load a new page based on URL typed in search bar*/
+        refreshURLButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                browser.loadBrowser(urlTextField.getText());
             }
         });
     }
@@ -187,8 +183,10 @@ public class GUI {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
-        View view = new View();
+
+        view = new View();
         view.openView(args);
+        browser = new Browser();
     }
 
     {
@@ -289,13 +287,17 @@ public class GUI {
         textEditor.setText("Text Editor Here");
         editorPane.add(textEditor, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(400, 100), null, 0, false));
         browserPane = new JPanel();
-        browserPane.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(5, 5, 5, 5), -1, -1));
+        browserPane.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(5, 5, 5, 5), -1, -1));
         panel1.add(browserPane, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        googleChromeEditorPane = new JEditorPane();
-        googleChromeEditorPane.setEditable(false);
-        googleChromeEditorPane.setText("Google Chrome");
-        googleChromeEditorPane.putClientProperty("JEditorPane.honorDisplayProperties", Boolean.FALSE);
-        browserPane.add(googleChromeEditorPane, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        urlTextField = new JTextField();
+        browserPane.add(urlTextField, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
+        browserPane.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer5 = new com.intellij.uiDesigner.core.Spacer();
+        browserPane.add(spacer5, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        refreshURLButton = new JButton();
+        refreshURLButton.setText("GO!!!");
+        browserPane.add(refreshURLButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

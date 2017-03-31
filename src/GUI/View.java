@@ -9,13 +9,15 @@ import javafx.stage.Stage;
 public class View extends Application
 {
     public Scene scene;
+    private Browser browser;
 
     @Override
     public void start(Stage stage)
     {
         // create the scene
         stage.setTitle("Selenium IDE");
-        scene = new Scene(new Browser(),750,500, Color.web("#666970"));
+        browser = new Browser();
+        scene = new Scene(browser,750,500, Color.web("#666970"));
         stage.setScene(scene);
         stage.show();
     }
@@ -23,5 +25,9 @@ public class View extends Application
     public static void openView(String[] args)
     {
         launch(args);
+    }
+
+    public void loadBrowser(String url) {
+        browser.loadBrowser(url);
     }
 }

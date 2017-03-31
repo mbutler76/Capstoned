@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -24,11 +27,27 @@ public class Browser extends Region
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        webEngine.load("http://www.reddit.com/");
+        webEngine.load("http://www.google.com/");
+
+        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+            public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                if(newValue == Worker.State.SUCCEEDED){
+                    System.out.println(webEngine.getLocation());
+                }
+            }
+        });
+
         //add the web view to the scene
         getChildren().add(browser);
 
     }
+
+    public void loadBrowser(String url)
+    {
+        webEngine.load(url);
+        getChildren().add(browser);
+    }
+
     private Node createSpacer()
     {
         Region spacer = new Region();
