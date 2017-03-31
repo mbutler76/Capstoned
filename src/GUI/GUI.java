@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.filechooser.*;
 import javax.xml.parsers.*;
+
+import javafx.embed.swing.JFXPanel;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 import java.net.*;
@@ -90,7 +92,7 @@ public class GUI {
     }
 
     /*Grabs HTML from passed in URL*/
-    public void getHTML(String url) throws IOException {
+    public static void getHTML(String url) throws IOException {
         URL u = new URL(url);
         Scanner s = new Scanner(u.openStream());
         while (s.hasNext()) {
@@ -99,6 +101,11 @@ public class GUI {
     }
 
     public GUI() throws IOException {
+
+        /*JFXPanel fxPanel = new JFXPanel();
+        View view = new View();
+        fxPanel.setScene(view.scene);
+        googleChromeEditorPane.add(fxPanel);*/
 
         /*Opens a java file in the editor pane*/
         openButton.addActionListener(new ActionListener() {
@@ -168,7 +175,7 @@ public class GUI {
             public void mouseClicked(MouseEvent e) {
                 //super.mouseClicked(e);
                 if (isRecording) {
-                    System.out.println("Browser clicked");
+                    System.out.println("GUI.Browser clicked");
                 }
             }
         });
@@ -180,6 +187,8 @@ public class GUI {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
+        View view = new View();
+        view.openView(args);
     }
 
     {
