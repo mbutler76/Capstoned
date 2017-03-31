@@ -183,7 +183,6 @@ public class GUI {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
-
         view = new View();
         view.openView(args);
         browser = new Browser();
