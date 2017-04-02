@@ -20,6 +20,7 @@ public class View extends Application
         scene = new Scene(browser,750,500, Color.web("#666970"));
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void openView(String[] args)

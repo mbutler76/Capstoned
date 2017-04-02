@@ -1,9 +1,5 @@
 package GUI;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +12,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class Browser extends Region
 {
@@ -24,22 +22,70 @@ public class Browser extends Region
 
     public Browser()
     {
+        System.out.println("Initializing browser");
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        webEngine.load("http://www.google.com/");
+        webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
 
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                 if(newValue == Worker.State.SUCCEEDED){
                     System.out.println(webEngine.getLocation());
+                    System.out.println(observable.toString());
+                    System.out.println("old Value: " + oldValue);
+                    System.out.println("new Value: " + newValue);
+
+                    NodeList nodeList = webEngine.getDocument().getElementsByTagName("*");
+
+                    for (int i = 0; i < nodeList.getLength(); i++){
+                        org.w3c.dom.Node node = nodeList.item(i);
+                        //if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
+                            System.out.println("Node Name: " + node.getNodeName() );
+                            System.out.println("Node Value: " + node.getNodeValue() );
+
+                            Element element = (Element) node;
+                            System.out.println("Element tag name: " + element.getTagName() );
+
+
+                        //}
+
+
+
+                        //}
+
+                    }
                 }
             }
         });
 
+        //webEngine
+
+
+        //Element el = doc.getElementById("a");
+        //NodeList list = doc.getElementsByTagName("*");
+        //System.out.println("List Length: "+ list.getLength());
+
+        /*for (int i=0; i<list.getLength(); i++)
+            ((EventTarget)list.item(i)).addEventListener("click", new EventListener() {
+                @Override
+                public void handleEvent(Event evt) {
+                    System.out.println(evt.toString());
+                }
+            }, false);
+
+            */
+
         //add the web view to the scene
         getChildren().add(browser);
 
+    }
+    public WebEngine getWebEngine(){
+        return webEngine;
+    }
+
+    public void test(){
+        System.out.print("Browser Testing");
     }
 
     public void loadBrowser(String url)

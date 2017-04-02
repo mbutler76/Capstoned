@@ -183,9 +183,17 @@ public class GUI {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
+
+        System.out.println("Before: view = new View()");
         view = new View();
+        System.out.println("Before : view.openView(args) ");
         view.openView(args);
+
+        System.out.println("browser = new Browser()");
         browser = new Browser();
+
+        System.out.println("Hello?");
+        System.out.println("lenght:" + browser.getWebEngine().getDocument().getElementsByTagName("*").getLength());
     }
 
     {
