@@ -22,6 +22,7 @@ public class Browser extends Region
 
     public Browser()
     {
+
         System.out.println("Initializing browser");
         //apply the styles
         getStyleClass().add("browser");
@@ -79,6 +80,8 @@ public class Browser extends Region
         //add the web view to the scene
         getChildren().add(browser);
 
+        //loadBrowser("https://www.reddit.com/");
+
     }
     public WebEngine getWebEngine(){
         return webEngine;
@@ -90,8 +93,10 @@ public class Browser extends Region
 
     public void loadBrowser(String url)
     {
+        System.out.println(url);
         webEngine.load(url);
-        getChildren().add(browser);
+        webEngine.reload();
+        //getChildren().add(browser);
     }
 
     private Node createSpacer()

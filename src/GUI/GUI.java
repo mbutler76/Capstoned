@@ -2,11 +2,8 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.filechooser.*;
 import javax.xml.parsers.*;
 
@@ -172,9 +169,41 @@ public class GUI {
         /*Load a new page based on URL typed in search bar*/
         refreshURLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("INSIDE ADD ACTION LIESTENER");
+                //System.out.println(urlTextField.getText());
                 browser.loadBrowser(urlTextField.getText());
+
             }
         });
+        /*
+        view.getBrowser().addEventHandler(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        },)
+        */
+
     }
 
     public static void main(String[] args) throws IOException, SAXException {
@@ -183,14 +212,49 @@ public class GUI {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
+        mainFrame.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("mouseClicked");
+                System.out.println(e.toString());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("mousePressed");
+                System.out.println(e.toString());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                System.out.println("mouseReleased");
+                System.out.println(e.toString());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                //System.out.println("mouseEntered");
+                //System.out.println(e.toString());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                //System.out.println("mouseExited");
+                //System.out.println(e.toString());
+            }
+        });
 
         System.out.println("Before: view = new View()");
         view = new View();
         System.out.println("Before : view.openView(args) ");
         view.openView(args);
 
-        System.out.println("browser = new Browser()");
-        browser = new Browser();
+        //view.getBrowser().add
+
+        //System.out.println("browser = new Browser()");
+        //browser = new Browser();
+
+
 
         System.out.println("Hello?");
         System.out.println("lenght:" + browser.getWebEngine().getDocument().getElementsByTagName("*").getLength());
