@@ -15,6 +15,10 @@ import javafx.scene.web.WebView;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public class Browser extends Region
 {
     final WebView browser = new WebView();
@@ -31,7 +35,7 @@ public class Browser extends Region
 
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-                if(newValue == Worker.State.SUCCEEDED){
+                if(newValue == Worker.State.SUCCEEDED) {
                     System.out.println(webEngine.getLocation());
                     //System.out.println(observable.toString());
                     //System.out.println("old Value: " + oldValue);
@@ -39,19 +43,37 @@ public class Browser extends Region
 
                     NodeList nodeList = webEngine.getDocument().getElementsByTagName("*");
 
-                    for (int i = 0; i < nodeList.getLength(); i++){
+                    for (int i = 0; i < nodeList.getLength(); i++) {
                         org.w3c.dom.Node node = nodeList.item(i);
                         //if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                            //System.out.println("Node Name: " + node.getNodeName() );
-                            //System.out.println("Node Value: " + node.getNodeValue() );
+                        //System.out.println("Node Name: " + node.getNodeName() );
+                        //System.out.println("Node Value: " + node.getNodeValue() );
 
-                            Element element = (Element) node;
-                            System.out.println("Element tag name: " + element.getTagName() );
+                        Element element = (Element) node;
+                        System.out.println("Element tag name: " + element.getTagName());
+
 
                     }
+
+
+
+                        ScriptEngineManager factory = new ScriptEngineManager();
+                        ScriptEngine engine = factory.getEngineByName("JavaScript");
+                        try {
+                            engine.eval("print('Hello, World')");
+                            //engine.eval("element.addEventListener(\"click\", function(){ alert(\"Hello World!\"); });");
+
+                        } catch (ScriptException e) {
+                            e.printStackTrace();
+                        }
+
+                        //webEngine.getDocument()
+
                 }
             }
         });
+
+
 
         //add the web view to the scene
         getChildren().add(browser);

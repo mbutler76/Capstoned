@@ -171,7 +171,14 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("INSIDE ADD ACTION LIESTENER");
                 //System.out.println(urlTextField.getText());
-                browser.loadBrowser(urlTextField.getText());
+                System.out.println("Before: view = new View()");
+                view = new View();
+                System.out.println("Before : view.openView(args) ");
+                //view.openView(args);
+
+                view.getBrowser().loadBrowser("www.google.com");
+
+                //browser.loadBrowser(urlTextField.getText());
 
             }
         });
@@ -219,6 +226,8 @@ public class GUI {
         view = new View();
         System.out.println("Before : view.openView(args) ");
         view.openView(args);
+
+        //view.getBrowser().loadBrowser("www.google.com");
 
         //view.getBrowser().add
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59715899-d5d5-4c12-afaa-a21ac654dddb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Capstoned/GUI/GUI.class" afterPath="$PROJECT_DIR$/out/production/Capstoned/GUI/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/Browser.java" afterPath="$PROJECT_DIR$/src/GUI/Browser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/GUI.java" afterPath="$PROJECT_DIR$/src/GUI/GUI.java" />
@@ -34,10 +35,14 @@
       <file leaf-file-name="Browser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/Browser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-287">
-              <caret line="47" column="61" lean-forward="true" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+            <state relative-caret-position="1078">
+              <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3655#3656#0" expanded="true" />
+                <element signature="e#3681#3682#0" expanded="true" />
+                <element signature="e#3751#3752#0" expanded="true" />
+                <element signature="e#3777#3778#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,11 +51,11 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2662">
-              <caret line="49" column="32" lean-forward="false" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+            <state relative-caret-position="3435">
+              <caret line="198" column="0" lean-forward="true" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
               <folding>
                 <element signature="initializer##0;class#GUI#0" expanded="true" />
-                <element signature="e#7607#7665#0" expanded="false" />
+                <element signature="e#7944#8002#0" expanded="false" />
                 <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
                 <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
                 <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -62,11 +67,11 @@
       <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+            <state relative-caret-position="1078">
+              <caret line="61" column="54" lean-forward="false" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
               <folding>
-                <element signature="e#913#914#0" expanded="true" />
-                <element signature="e#948#949#0" expanded="true" />
+                <element signature="e#2248#2249#0" expanded="true" />
+                <element signature="e#2283#2284#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,6 +85,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>browser</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -102,9 +112,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/GUI/GUI.form" />
         <option value="$PROJECT_DIR$/src/GUI/ActionEventT1.java" />
-        <option value="$PROJECT_DIR$/src/GUI/View.java" />
-        <option value="$PROJECT_DIR$/src/GUI/Browser.java" />
         <option value="$PROJECT_DIR$/src/GUI/GUI.java" />
+        <option value="$PROJECT_DIR$/src/GUI/Browser.java" />
+        <option value="$PROJECT_DIR$/src/GUI/View.java" />
       </list>
     </option>
   </component>
@@ -436,7 +446,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491934766761</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added scroll bar to the text editor">
+      <created>1491936535400</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1491936535400</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -509,6 +526,10 @@
           <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -519,7 +540,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -532,8 +553,8 @@
         <state relative-caret-position="704">
           <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -543,8 +564,8 @@
         <state relative-caret-position="198">
           <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
-            <element signature="e#163#164#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
+            <element signature="e#163#164#0" expanded="false" />
+            <element signature="e#191#192#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -560,6 +581,10 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -570,7 +595,7 @@
           <caret line="187" column="26" lean-forward="true" selection-start-line="187" selection-start-column="26" selection-end-line="187" selection-end-column="26" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -583,8 +608,8 @@
         <state relative-caret-position="396">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -600,7 +625,7 @@
           <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -613,8 +638,8 @@
         <state relative-caret-position="486">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -625,6 +650,10 @@
           <caret line="51" column="65" lean-forward="true" selection-start-line="51" selection-start-column="65" selection-end-line="51" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -640,7 +669,7 @@
           <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -653,8 +682,8 @@
         <state relative-caret-position="486">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -665,6 +694,10 @@
           <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -680,7 +713,7 @@
           <caret line="189" column="37" lean-forward="false" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="37" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -693,8 +726,8 @@
         <state relative-caret-position="297">
           <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -705,13 +738,12 @@
           <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/GUI.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/GUI.form">
@@ -734,19 +766,24 @@
         <state relative-caret-position="242">
           <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
           <folding>
-            <element signature="e#163#164#0" expanded="true" />
-            <element signature="e#191#192#0" expanded="true" />
+            <element signature="e#163#164#0" expanded="false" />
+            <element signature="e#191#192#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/GUI.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2662">
-          <caret line="49" column="32" lean-forward="false" selection-start-line="49" selection-start-column="32" selection-end-line="49" selection-end-column="32" />
+        <state relative-caret-position="3435">
+          <caret line="198" column="0" lean-forward="true" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
           <folding>
             <element signature="initializer##0;class#GUI#0" expanded="true" />
-            <element signature="e#7607#7665#0" expanded="false" />
+            <element signature="e#7944#8002#0" expanded="false" />
             <element signature="docComment;method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="method#$$$setupUI$$$#0;class#GUI#0" expanded="false" />
             <element signature="docComment;method#$$$getRootComponent$$$#0;class#GUI#0" expanded="false" />
@@ -756,21 +793,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/Browser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-287">
-          <caret line="47" column="61" lean-forward="true" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+        <state relative-caret-position="1078">
+          <caret line="61" column="29" lean-forward="true" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3655#3656#0" expanded="true" />
+            <element signature="e#3681#3682#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="e#3777#3778#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        <state relative-caret-position="1078">
+          <caret line="61" column="54" lean-forward="false" selection-start-line="61" selection-start-column="54" selection-end-line="61" selection-end-column="54" />
           <folding>
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
           </folding>
         </state>
       </provider>
