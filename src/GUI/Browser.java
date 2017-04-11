@@ -33,49 +33,25 @@ public class Browser extends Region
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                 if(newValue == Worker.State.SUCCEEDED){
                     System.out.println(webEngine.getLocation());
-                    System.out.println(observable.toString());
-                    System.out.println("old Value: " + oldValue);
-                    System.out.println("new Value: " + newValue);
+                    //System.out.println(observable.toString());
+                    //System.out.println("old Value: " + oldValue);
+                    //System.out.println("new Value: " + newValue);
 
                     NodeList nodeList = webEngine.getDocument().getElementsByTagName("*");
 
                     for (int i = 0; i < nodeList.getLength(); i++){
                         org.w3c.dom.Node node = nodeList.item(i);
                         //if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                            System.out.println("Node Name: " + node.getNodeName() );
-                            System.out.println("Node Value: " + node.getNodeValue() );
+                            //System.out.println("Node Name: " + node.getNodeName() );
+                            //System.out.println("Node Value: " + node.getNodeValue() );
 
                             Element element = (Element) node;
                             System.out.println("Element tag name: " + element.getTagName() );
-
-
-                        //}
-
-
-
-                        //}
 
                     }
                 }
             }
         });
-
-        //webEngine
-
-
-        //Element el = doc.getElementById("a");
-        //NodeList list = doc.getElementsByTagName("*");
-        //System.out.println("List Length: "+ list.getLength());
-
-        /*for (int i=0; i<list.getLength(); i++)
-            ((EventTarget)list.item(i)).addEventListener("click", new EventListener() {
-                @Override
-                public void handleEvent(Event evt) {
-                    System.out.println(evt.toString());
-                }
-            }, false);
-
-            */
 
         //add the web view to the scene
         getChildren().add(browser);

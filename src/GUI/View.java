@@ -26,10 +26,6 @@ public class View extends Application
         stage.setScene(scene);
         stage.show();
 
-
-
-
-
     }
 
     public static void openView(String[] args)

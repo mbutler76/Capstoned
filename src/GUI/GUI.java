@@ -175,35 +175,6 @@ public class GUI {
 
             }
         });
-        /*
-        view.getBrowser().addEventHandler(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        },)
-        */
-
     }
 
     public static void main(String[] args) throws IOException, SAXException {
@@ -256,8 +227,7 @@ public class GUI {
 
 
 
-        System.out.println("Hello?");
-        System.out.println("lenght:" + browser.getWebEngine().getDocument().getElementsByTagName("*").getLength());
+        System.out.println("END OF PROGRAM");
     }
 
     {
