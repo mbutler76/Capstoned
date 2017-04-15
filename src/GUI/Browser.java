@@ -1,6 +1,7 @@
 package GUI;
 
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -12,8 +13,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
+import org.w3c.dom.events.EventTarget;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -33,6 +38,16 @@ public class Browser extends Region
         // load the web page
         webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
 
+        EventListener listener = new EventListener() {
+            public void handleEvent(Event ev) {
+                //Platform.exit();
+                System.out.println("Event: " + ev.toString());
+                System.out.println(ev.getCurrentTarget());
+
+                System.out.println("this: " + this.toString());
+            }
+        };
+
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                 if(newValue == Worker.State.SUCCEEDED) {
@@ -50,8 +65,16 @@ public class Browser extends Region
                         //System.out.println("Node Value: " + node.getNodeValue() );
 
                         Element element = (Element) node;
-                        System.out.println("Element tag name: " + element.getTagName());
 
+                        //Document doc = webEngine.getDocument();
+                        //Element el = doc.getElementById("exit-app");
+                        if (!element.getTagName().contentEquals("HTML") && !element.getTagName().contentEquals("BODY")
+                                && !element.getTagName().contentEquals("HEAD") ) {
+                            System.out.println("Element tag name: " + element.getTagName());
+                            System.out.println("Attribute: " + element.getAttribute("id"));
+                            ((EventTarget) element).addEventListener("click", listener, false);
+
+                        }
 
                     }
 
@@ -61,13 +84,12 @@ public class Browser extends Region
                         ScriptEngine engine = factory.getEngineByName("JavaScript");
                         try {
                             engine.eval("print('Hello, World')");
-                            //engine.eval("element.addEventListener(\"click\", function(){ alert(\"Hello World!\"); });");
 
                         } catch (ScriptException e) {
                             e.printStackTrace();
                         }
 
-                        //webEngine.getDocument()
+
 
                 }
             }

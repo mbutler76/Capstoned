@@ -9,10 +9,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class View extends Application
 {
@@ -38,6 +34,8 @@ public class View extends Application
                     System.out.println(event.toString());
                 }
                 System.out.println("INSIDE SETONKEYPRESSED");
+
+                System.out.println("HTML PROPERTIES: " + getBrowser().getAccessibleText());
             }
         });
 
@@ -51,17 +49,25 @@ public class View extends Application
             }
         });
 
-        scene.getOnMouseClicked();
+
 
         scene.setOnMouseClicked(new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
-                System.out.println("Something clicked");
+                //System.out.println("Something clicked");
 
-                System.out.println(event.toString());
-                System.out.println(event.getButton());
+                //System.out.println(event.toString());
+                //System.out.println(event.getSource());
+
+                //System.out.println(scene.getOnMouseClicked().toString());
+
             }
         });
+
+
+        System.out.println(browser.getAccessibleText());
+        System.out.println(browser.getDepthTest());
+        //System.out.println(browser.getTex)
 
 
     }
