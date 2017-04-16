@@ -14,34 +14,33 @@ import java.net.*;
 import java.util.Scanner;
 
 public class GUI {
-    /*GUI compoenents*/
-    private JPanel mainPanel;
-    private JPanel fileTab;
-    private JPanel editTab;
-    private JPanel recordTab;
-    private JPanel testTab;
-    private JPanel browserPane;
-    private JPanel testPane;
-    private JList testCases;
-    private JScrollBar testScrollbar;
-    private JButton saveButton;
-    private JButton openButton;
-    private JButton newButton;
-    private JLabel testLabel;
-    private JProgressBar progressBar;
-    private JLabel runsLabel;
-    private JLabel failuresLabel;
-    private JButton runButton;
-    private JButton stopTestButton;
-    private JButton recordButton;
-    private JButton pauseButton;
-    private JButton stopRecordButton;
-    private JEditorPane googleChromeEditorPane;
-    private JPanel editorPane;
-    private JEditorPane pictureEditorPane;
-    private JEditorPane textEditor;
-    private JTextField urlTextField;
-    private JButton refreshURLButton;
+    /*GUI components*/
+    public JPanel mainPanel;
+    public JPanel fileTab;
+    public JPanel editTab;
+    public JPanel recordTab;
+    public JPanel testTab;
+    public JPanel browserPane;
+    public JPanel testPane;
+    public JList testCases;
+    public JScrollBar testScrollbar;
+    public JButton saveButton;
+    public JButton openButton;
+    public JButton newButton;
+    public JLabel testLabel;
+    public JProgressBar progressBar;
+    public JLabel runsLabel;
+    public JLabel failuresLabel;
+    public JButton runButton;
+    public JButton stopTestButton;
+    public JButton recordButton;
+    public JButton pauseButton;
+    public JButton stopRecordButton;
+    public JPanel editorPane;
+    public JEditorPane pictureEditorPane;
+    public JEditorPane textEditor;
+    public JTextField urlTextField;
+    public JButton refreshURLButton;
 
     public boolean isRecording = false;
     public File selected;
@@ -185,57 +184,16 @@ public class GUI {
     }
 
     public static void main(String[] args) throws IOException, SAXException {
-        JFrame mainFrame = new JFrame("Selenium IDE");
-        mainFrame.setContentPane(new GUI().mainPanel);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
-        mainFrame.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("mouseClicked");
-                System.out.println(e.toString());
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                System.out.println("mousePressed");
-                System.out.println(e.toString());
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                System.out.println("mouseReleased");
-                System.out.println(e.toString());
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                //System.out.println("mouseEntered");
-                //System.out.println(e.toString());
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                //System.out.println("mouseExited");
-                //System.out.println(e.toString());
-            }
-        });
+        //JFrame mainFrame = new JFrame("Selenium IDE");
+        //mainFrame.setContentPane(new GUI().mainPanel);
+        //mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //mainFrame.pack();
+        //mainFrame.setVisible(true);
 
         System.out.println("Before: view = new View()");
         view = new View();
         System.out.println("Before : view.openView(args) ");
         view.openView(args);
-
-        //view.getBrowser().loadBrowser("www.google.com");
-
-        //view.getBrowser().add
-
-        //System.out.println("browser = new Browser()");
-        //browser = new Browser();
-
-
-
         System.out.println("END OF PROGRAM");
     }
 

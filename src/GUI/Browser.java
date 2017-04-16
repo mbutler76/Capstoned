@@ -1,6 +1,5 @@
 package GUI;
 
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,13 +19,24 @@ import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import java.io.IOException;
+
 public class Browser extends Region
 {
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
 
-    public Browser()
-    {
+    public Browser() throws IOException {
+
+        final JFrame mainFrame = new JFrame("Selenium IDE");
+        final GUI gui = new GUI();
+        mainFrame.setContentPane(gui.mainPanel);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+        final javax.swing.text.Document doc = gui.textEditor.getDocument();
 
         System.out.println("Initializing browser");
         //apply the styles
@@ -34,13 +44,45 @@ public class Browser extends Region
         // load the web page
         //webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
         webEngine.load("http://www.google.com");
+        webEngine.reload();
 
         final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
                 System.out.println("Event: " + ev.toString());
-                System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
+                Element element = (Element) ev.getCurrentTarget();
 
-                System.out.println("this: " + this.toString());
+                if(element.getAttribute("id") != null)
+                {
+                    try{
+                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("id"), null);
+                    } catch(BadLocationException exc)
+                    {
+                        exc.printStackTrace();
+                    }
+                }
+                else if(element.getAttribute("name") != null)
+                {
+                    try{
+                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("name"), null);
+                    } catch(BadLocationException exc)
+                    {
+                        exc.printStackTrace();
+                    }
+                }
+                else if(element.getAttribute("class") != null)
+                {
+                    try{
+                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("class"), null);
+                    } catch(BadLocationException exc)
+                    {
+                        exc.printStackTrace();
+                    }
+                }
+                else
+                {
+                    System.out.println(element.getAttribute("*"));
+                }
+                System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
             }
         };
 
@@ -59,7 +101,6 @@ public class Browser extends Region
                                 && !element.getTagName().contentEquals("HEAD") ) {
 
                             System.out.println("Element tag name: " + element.getTagName());
-                            System.out.println("Attribute: " + element.getAttribute("id"));
                             ((EventTarget) element).addEventListener("click", listener, false);
                         }
                     }
