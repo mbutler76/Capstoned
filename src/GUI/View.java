@@ -15,12 +15,18 @@ public class View extends Application
     public Scene scene;
     private Browser browser;
 
+    /*public View()
+    {
+        browser = new Browser();
+    }*/
+
     @Override
     public void start(Stage stage)
     {
         // create the scene
         stage.setTitle("Selenium IDE");
         browser = new Browser();
+        browser.loadBrowser("www.google.com");
         scene = new Scene(browser,750,500, Color.web("#666970"));
         stage.setScene(scene);
         stage.show();

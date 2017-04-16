@@ -20,10 +20,6 @@ import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 public class Browser extends Region
 {
     final WebView browser = new WebView();
@@ -36,13 +32,13 @@ public class Browser extends Region
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
+        //webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
+        webEngine.load("http://www.google.com");
 
-        EventListener listener = new EventListener() {
+        final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
-                //Platform.exit();
                 System.out.println("Event: " + ev.toString());
-                System.out.println(ev.getCurrentTarget());
+                System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
 
                 System.out.println("this: " + this.toString());
             }
@@ -52,50 +48,24 @@ public class Browser extends Region
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                 if(newValue == Worker.State.SUCCEEDED) {
                     System.out.println(webEngine.getLocation());
-                    //System.out.println(observable.toString());
-                    //System.out.println("old Value: " + oldValue);
-                    //System.out.println("new Value: " + newValue);
 
                     NodeList nodeList = webEngine.getDocument().getElementsByTagName("*");
 
                     for (int i = 0; i < nodeList.getLength(); i++) {
                         org.w3c.dom.Node node = nodeList.item(i);
-                        //if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                        //System.out.println("Node Name: " + node.getNodeName() );
-                        //System.out.println("Node Value: " + node.getNodeValue() );
-
                         Element element = (Element) node;
 
-                        //Document doc = webEngine.getDocument();
-                        //Element el = doc.getElementById("exit-app");
                         if (!element.getTagName().contentEquals("HTML") && !element.getTagName().contentEquals("BODY")
                                 && !element.getTagName().contentEquals("HEAD") ) {
+
                             System.out.println("Element tag name: " + element.getTagName());
                             System.out.println("Attribute: " + element.getAttribute("id"));
                             ((EventTarget) element).addEventListener("click", listener, false);
-
                         }
-
                     }
-
-
-
-                        ScriptEngineManager factory = new ScriptEngineManager();
-                        ScriptEngine engine = factory.getEngineByName("JavaScript");
-                        try {
-                            engine.eval("print('Hello, World')");
-
-                        } catch (ScriptException e) {
-                            e.printStackTrace();
-                        }
-
-
-
                 }
             }
         });
-
-
 
         //add the web view to the scene
         getChildren().add(browser);
