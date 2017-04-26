@@ -8,6 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.swing.text.BadLocationException;
 import java.io.IOException;
 
 
@@ -21,7 +22,6 @@ public class View extends Application
         // create the scene
         stage.setTitle("Selenium IDE");
         browser = new Browser();
-        browser.loadBrowser("www.google.com");
         scene = new Scene(browser,750,500, Color.web("#666970"));
         stage.setScene(scene);
         stage.show();
@@ -29,13 +29,13 @@ public class View extends Application
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getCode()==KeyCode.RIGHT) { // don't use toString here!!!
-                    System.out.println(event.toString());
-                } else if (event.getCode() == KeyCode.LEFT) {
-                    System.out.println(event.toString());
-                }
-                System.out.println("INSIDE SETONKEYPRESSED");
 
+                try{
+                    browser.doc.insertString(browser.doc.getLength(), event.getCode().toString(), null);
+                } catch(BadLocationException exc)
+                {
+                    exc.printStackTrace();
+                }
                 //System.out.println("HTML PROPERTIES: " + getBrowser().getAccessibleText());
             }
         });

@@ -1,6 +1,5 @@
 package GUI;
 
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -12,7 +11,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.events.Event;
@@ -27,6 +25,7 @@ public class Browser extends Region
 {
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
+    public final javax.swing.text.Document doc;
 
     public Browser() throws IOException {
 
@@ -36,7 +35,12 @@ public class Browser extends Region
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
-        final javax.swing.text.Document doc = gui.textEditor.getDocument();
+        doc = gui.textEditor.getDocument();
+        final String beginningCommand = "driver.findElement(By.xpath(\"";
+        final String endCommand = "\"))";
+        String clickCommand = ".click();";
+        String getTextCommand = ".getText();";
+        //String insert = "";
 
         System.out.println("Initializing browser");
         //apply the styles
@@ -48,41 +52,38 @@ public class Browser extends Region
 
         final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
-                System.out.println("Event: " + ev.toString());
-                Element element = (Element) ev.getCurrentTarget();
+                if(gui.isRecording) {
+                    System.out.println("Event: " + ev.toString());
+                    Element element = (Element) ev.getCurrentTarget();
+                    String insert;
 
-                if(element.getAttribute("id") != null)
-                {
-                    try{
-                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("id"), null);
-                    } catch(BadLocationException exc)
-                    {
-                        exc.printStackTrace();
+
+                    if (element.getAttribute("id") != null) {
+                        insert = beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
+                        try {
+                            doc.insertString(doc.getLength(), insert, null);
+                        } catch (BadLocationException exc) {
+                            exc.printStackTrace();
+                        }
+                    } else if (element.getAttribute("name") != null) {
+                        insert = beginningCommand + "//*[@name='" + element.getAttribute("name") + "']" + endCommand;
+                        try {
+                            doc.insertString(doc.getLength(), insert, null);
+                        } catch (BadLocationException exc) {
+                            exc.printStackTrace();
+                        }
+                    } else if (element.getAttribute("class") != null) {
+                        insert = beginningCommand + "//*[@class='" + element.getAttribute("class") + "']" + endCommand;
+                        try {
+                            doc.insertString(doc.getLength(), insert, null);
+                        } catch (BadLocationException exc) {
+                            exc.printStackTrace();
+                        }
+                    } else {
+                        System.out.println(element.getAttribute("*"));
                     }
+                    System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
                 }
-                else if(element.getAttribute("name") != null)
-                {
-                    try{
-                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("name"), null);
-                    } catch(BadLocationException exc)
-                    {
-                        exc.printStackTrace();
-                    }
-                }
-                else if(element.getAttribute("class") != null)
-                {
-                    try{
-                        doc.insertString(doc.getLength(), "\n" + element.getAttribute("class"), null);
-                    } catch(BadLocationException exc)
-                    {
-                        exc.printStackTrace();
-                    }
-                }
-                else
-                {
-                    System.out.println(element.getAttribute("*"));
-                }
-                System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
             }
         };
 

@@ -128,7 +128,14 @@ public class GUI {
                 if (isFileOpen) {
                     saveFile();
                 } else {
-                    infoBox("There is no file currently open", "Save Unsuccessful");
+                    try {
+                        String code = textEditor.getText();
+                        PrintWriter printWriter = new PrintWriter("SeleniumTest.java");
+                        printWriter.print(code);
+                        printWriter.close();
+                    } catch (IOException ie) {
+                    ie.printStackTrace();
+                }
                 }
             }
         });
@@ -168,12 +175,6 @@ public class GUI {
         /*Load a new page based on URL typed in search bar*/
         refreshURLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("INSIDE ADD ACTION LIESTENER");
-                //System.out.println(urlTextField.getText());
-                System.out.println("Before: view = new View()");
-                view = new View();
-                System.out.println("Before : view.openView(args) ");
-                //view.openView(args);
 
                 view.getBrowser().loadBrowser("www.google.com");
 
