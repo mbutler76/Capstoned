@@ -30,6 +30,7 @@ public class Browser extends Region
 
     public Browser() throws IOException {
 
+
         final JFrame mainFrame = new JFrame("Selenium IDE");
         gui = new GUI();
         mainFrame.setContentPane(gui.mainPanel);
@@ -40,16 +41,14 @@ public class Browser extends Region
         final String beginningCommand = "driver.findElement(By.xpath(\"";
         final String endCommand = "\"))";
         final String clickCommand = ".click();";
-        final String getTextCommand = ".getText();";
+        final String getTextCommand = ".getText()";
         final String sendKeysCommand = ".sendKeys(";
         final String sleepCommand = "\nThread.sleep(1000);";
 
-        System.out.println("Initializing browser");
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        //webEngine.load("http://www.csce.uark.edu/~aelezcan/capstone/capstone.html");
-        webEngine.load("http://www.google.com");
+        webEngine.load(gui.URL);
 
 
         final EventListener listener = new EventListener() {
@@ -59,13 +58,13 @@ public class Browser extends Region
                     String insert;
 
                     if (element.getAttribute("id") != null) {
-                        insert = "\n" + beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
+                        insert = beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + sleepCommand;
+                            insert = insert + clickCommand + "\n" + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand + sleepCommand;
+                            insert = insert + sendKeysCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
@@ -74,11 +73,11 @@ public class Browser extends Region
                     } else if (element.getAttribute("name") != null) {
                         insert = "\n" + beginningCommand + "//*[@name='" + element.getAttribute("name") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + sleepCommand;
+                            insert = insert + clickCommand + "\n" + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand + sleepCommand;
+                            insert = insert + sendKeysCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
@@ -87,11 +86,11 @@ public class Browser extends Region
                     } else if (element.getAttribute("class") != null) {
                         insert = "\n" + beginningCommand + "//*[@class='" + element.getAttribute("class") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + sleepCommand;
+                            insert = insert + clickCommand + "\n" + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand + sleepCommand;
+                            insert = insert + sendKeysCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
