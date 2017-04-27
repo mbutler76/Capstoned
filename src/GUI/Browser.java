@@ -47,7 +47,7 @@ public class Browser extends Region
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        //webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
+        //webEngine.load("http://www.csce.uark.edu/~aelezcan/capstone/capstone.html");
         webEngine.load("http://www.google.com");
 
 
@@ -120,7 +120,7 @@ public class Browser extends Region
                         Element element = (Element) node;
 
                         if (!element.getTagName().contentEquals("HTML") && !element.getTagName().contentEquals("BODY")
-                                && !element.getTagName().contentEquals("HEAD") ) {
+                                && !element.getTagName().contentEquals("HEAD") && !element.getTagName().contentEquals("DIV") ) {
 
                             ((EventTarget) element).addEventListener("click", listener, false);
                         }
