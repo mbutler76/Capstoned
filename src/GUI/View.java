@@ -27,7 +27,7 @@ public class View extends Application
         stage.show();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
+            //@Override
             public void handle(KeyEvent event) {
 
                 if(browser.gui.isRecording && browser.gui.dotSendKeys) {
