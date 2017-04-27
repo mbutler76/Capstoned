@@ -30,13 +30,13 @@ public class View extends Application
             @Override
             public void handle(KeyEvent event) {
 
-                try{
-                    browser.doc.insertString(browser.doc.getLength(), event.getCode().toString(), null);
-                } catch(BadLocationException exc)
-                {
-                    exc.printStackTrace();
+                if(browser.gui.isRecording) {
+                    try {
+                        browser.doc.insertString(browser.doc.getLength(), event.getCode().toString(), null);
+                    } catch (BadLocationException exc) {
+                        exc.printStackTrace();
+                    }
                 }
-                //System.out.println("HTML PROPERTIES: " + getBrowser().getAccessibleText());
             }
         });
 

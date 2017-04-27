@@ -82,15 +82,6 @@ public class GUI {
         }
     }
 
-    /*Grabs HTML from passed in URL*/
-    public static void getHTML(String url) throws IOException {
-        URL u = new URL(url);
-        Scanner s = new Scanner(u.openStream());
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-
     public GUI() throws IOException {
 
         /*Opens a java file in the editor pane*/
@@ -166,27 +157,14 @@ public class GUI {
         /*Load a new page based on URL typed in search bar*/
         refreshURLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 view.getBrowser().loadBrowser("www.google.com");
-
-                //browser.loadBrowser(urlTextField.getText());
-
             }
         });
     }
 
     public static void main(String[] args) throws IOException, SAXException {
-        //JFrame mainFrame = new JFrame("Selenium IDE");
-        //mainFrame.setContentPane(new GUI().mainPanel);
-        //mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //mainFrame.pack();
-        //mainFrame.setVisible(true);
-
-        System.out.println("Before: view = new View()");
         view = new View();
-        System.out.println("Before : view.openView(args) ");
         view.openView(args);
-        System.out.println("END OF PROGRAM");
     }
 
     {

@@ -26,11 +26,12 @@ public class Browser extends Region
     final WebView browser = new WebView();
     final WebEngine webEngine = browser.getEngine();
     public final javax.swing.text.Document doc;
+    public final GUI gui;
 
     public Browser() throws IOException {
 
         final JFrame mainFrame = new JFrame("Selenium IDE");
-        final GUI gui = new GUI();
+        gui = new GUI();
         mainFrame.setContentPane(gui.mainPanel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
@@ -46,18 +47,15 @@ public class Browser extends Region
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
-        //webEngine.load("http://www.google.com");
-        //webEngine.reload();
+        //webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
+        webEngine.load("http://www.google.com");
 
 
         final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
                 if(gui.isRecording) {
-                    System.out.println("Event: " + ev.toString());
                     Element element = (Element) ev.getCurrentTarget();
                     String insert;
-
 
                     if (element.getAttribute("id") != null) {
                         insert = beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
@@ -81,9 +79,8 @@ public class Browser extends Region
                             exc.printStackTrace();
                         }
                     } else {
-                        System.out.println(element.getAttribute("*"));
+                        //System.out.println(element.getAttribute("*"));
                     }
-                    System.out.println(((Element) ev.getCurrentTarget()).getAttribute("*"));
                 }
             }
         };
@@ -102,7 +99,6 @@ public class Browser extends Region
                         if (!element.getTagName().contentEquals("HTML") && !element.getTagName().contentEquals("BODY")
                                 && !element.getTagName().contentEquals("HEAD") ) {
 
-                            System.out.println("Element tag name: " + element.getTagName());
                             ((EventTarget) element).addEventListener("click", listener, false);
                         }
                     }
@@ -112,16 +108,6 @@ public class Browser extends Region
 
         //add the web view to the scene
         getChildren().add(browser);
-
-        //loadBrowser("https://www.reddit.com/");
-
-    }
-    public WebEngine getWebEngine(){
-        return webEngine;
-    }
-
-    public void test(){
-        System.out.print("Browser Testing");
     }
 
     public void loadBrowser(String url)
