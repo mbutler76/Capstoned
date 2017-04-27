@@ -46,9 +46,10 @@ public class Browser extends Region
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        //webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
-        webEngine.load("http://www.google.com");
-        webEngine.reload();
+        webEngine.load("http://www.csce.uark.edu/~aelezcan/index_test1.html");
+        //webEngine.load("http://www.google.com");
+        //webEngine.reload();
+
 
         final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
