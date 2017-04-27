@@ -42,6 +42,7 @@ public class Browser extends Region
         final String clickCommand = ".click();";
         final String getTextCommand = ".getText();";
         final String sendKeysCommand = ".sendKeys(";
+        final String sleepCommand = "\nThread.sleep(1000);";
 
         System.out.println("Initializing browser");
         //apply the styles
@@ -60,11 +61,11 @@ public class Browser extends Region
                     if (element.getAttribute("id") != null) {
                         insert = "\n" + beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand;
+                            insert = insert + getTextCommand + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand;
+                            insert = insert + sendKeysCommand + sleepCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
@@ -73,11 +74,11 @@ public class Browser extends Region
                     } else if (element.getAttribute("name") != null) {
                         insert = "\n" + beginningCommand + "//*[@name='" + element.getAttribute("name") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand;
+                            insert = insert + getTextCommand + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand;
+                            insert = insert + sendKeysCommand + sleepCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
@@ -86,11 +87,11 @@ public class Browser extends Region
                     } else if (element.getAttribute("class") != null) {
                         insert = "\n" + beginningCommand + "//*[@class='" + element.getAttribute("class") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = insert + getTextCommand;
+                            insert = insert + getTextCommand + sleepCommand;
                         else if(gui.dotSendKeys)
-                            insert = insert + sendKeysCommand;
+                            insert = insert + sendKeysCommand + sleepCommand;
                         try {
                             doc.insertString(doc.getLength(), insert, null);
                         } catch (BadLocationException exc) {
@@ -98,11 +99,6 @@ public class Browser extends Region
                         }
                     } else {
                         //System.out.println(element.getAttribute("*"));
-                    }
-                    try {
-                        doc.insertString(doc.getLength(), "\nThread.sleep(1000);", null);
-                    } catch (BadLocationException exc) {
-                        exc.printStackTrace();
                     }
                 }
             }
