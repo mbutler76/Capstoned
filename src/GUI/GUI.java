@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.filechooser.*;
+import javax.swing.text.BadLocationException;
 import javax.xml.parsers.*;
 
 import javafx.embed.swing.JFXPanel;
@@ -35,8 +36,12 @@ public class GUI {
     private JButton clickButton;
     private JButton gtButton;
     private JButton sendKeysButton;
+    private JButton endSendKeysButton;
 
     public boolean isRecording = false;
+    public boolean dotClick = false;
+    public boolean dotGetText = false;
+    public boolean dotSendKeys = false;
     public File selected;
     public boolean isFileOpen = false;
     private static View view;
@@ -133,7 +138,46 @@ public class GUI {
             }
         });
 
+        clickButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotClick = true;
+                dotGetText = false;
+                dotSendKeys = false;
+            }
+        });
 
+        gtButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotClick = false;
+                dotGetText = true;
+                dotSendKeys = false;
+            }
+        });
+
+        sendKeysButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotClick = false;
+                dotGetText = false;
+                dotSendKeys = true;
+            }
+        });
+
+        endSendKeysButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dotClick = false;
+                dotGetText = false;
+                dotSendKeys = false;
+                try {
+                    textEditor.getDocument().insertString(textEditor.getDocument().getLength(), ");", null);
+                } catch (BadLocationException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         /*Starts a recording session*/
         recordButton.addActionListener(new ActionListener() {
@@ -209,13 +253,13 @@ public class GUI {
         openButton.setText("Open");
         fileTab.add(openButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         recordTab = new JPanel();
-        recordTab.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        recordTab.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 8, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("Record", recordTab);
         recordButton = new JButton();
         recordButton.setText("Record");
         recordTab.add(recordButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
-        recordTab.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        recordTab.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(0, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         pauseButton = new JButton();
         pauseButton.setText("Pause");
         recordTab.add(pauseButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -231,6 +275,9 @@ public class GUI {
         sendKeysButton = new JButton();
         sendKeysButton.setText("Send Keys");
         recordTab.add(sendKeysButton, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        endSendKeysButton = new JButton();
+        endSendKeysButton.setText("End Send Keys");
+        recordTab.add(endSendKeysButton, new com.intellij.uiDesigner.core.GridConstraints(0, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         testTab = new JPanel();
         testTab.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         tabbedPane1.addTab("Test", testTab);

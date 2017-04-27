@@ -30,7 +30,7 @@ public class View extends Application
             @Override
             public void handle(KeyEvent event) {
 
-                if(browser.gui.isRecording) {
+                if(browser.gui.isRecording && browser.gui.dotSendKeys) {
                     try {
                         browser.doc.insertString(browser.doc.getLength(), event.getCode().toString(), null);
                     } catch (BadLocationException exc) {
