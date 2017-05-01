@@ -6,13 +6,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.swing.filechooser.*;
 import javax.swing.text.BadLocationException;
-import javax.xml.parsers.*;
-
-import javafx.embed.swing.JFXPanel;
 import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import java.net.*;
-import java.util.Scanner;
 
 public class GUI {
     /*GUI components*/
@@ -30,7 +24,6 @@ public class GUI {
     public JButton stopRecordButton;
     public JPanel editorPane;
     public JEditorPane textEditor;
-    public JButton refreshURLButton;
     private JButton clickButton;
     private JButton gtButton;
     private JButton sendKeysButton;
@@ -42,9 +35,9 @@ public class GUI {
     public boolean dotSendKeys = false;
     public File selected;
     public boolean isFileOpen = false;
+    JFileChooser chooser = new JFileChooser();
 
     public static String URL = "";
-    public static int URLoption;
     public final String firstCode = "\timport org.openqa.selenium.By;\n" +
             "\timport org.openqa.selenium.WebDriver;\n" +
             "\timport org.openqa.selenium.chrome.ChromeDriver;\n" +
@@ -73,15 +66,14 @@ public class GUI {
             "       ///////////////////////////////////////////////\n";
     public final String endCode = "\ndriver.close();\n}\n}";
     private static View view;
-    private static Browser browser;
 
     /*Info Popup*/
     public static void infoBox(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /*opens a java file*/
     public void openFile() {
-        JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Java Files", "java");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(openButton);
@@ -106,6 +98,7 @@ public class GUI {
         }
     }
 
+    /*Function to save a file when one is currently open*/
     public void saveFile() {
         try {
             String code = textEditor.getText();
@@ -139,7 +132,9 @@ public class GUI {
             }
         });
 
-        /*Saves the java file that is currently open*/
+        /*Finishes writing the necessary code
+        **Saves the java file that is currently open
+        **If no file open, SeleniumTest is created and saved*/
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -153,13 +148,11 @@ public class GUI {
                 if (isFileOpen) {
                     saveFile();
                 } else {
-                    try {
-                        String code = textEditor.getText();
-                        PrintWriter printWriter = new PrintWriter("SeleniumTest.java");
-                        printWriter.print(code);
-                        printWriter.close();
-                    } catch (IOException ie) {
-                        ie.printStackTrace();
+                    chooser.setSelectedFile(new File("SeleniumTest.java"));
+                    int i = chooser.showSaveDialog(saveButton);
+                    if (i == chooser.APPROVE_OPTION) {
+                        selected = chooser.getSelectedFile();
+                        saveFile();
                     }
                 }
             }
@@ -169,7 +162,9 @@ public class GUI {
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selected = null;
                 try {
+                    textEditor.getDocument().remove(0, textEditor.getDocument().getLength());
                     textEditor.getDocument().insertString(textEditor.getDocument().getLength(), firstCode + URL + secondCode, null);
                 } catch (BadLocationException e1) {
                     e1.printStackTrace();
@@ -177,6 +172,7 @@ public class GUI {
             }
         });
 
+        /*Sets click command active*/
         clickButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -186,6 +182,7 @@ public class GUI {
             }
         });
 
+        /*Sets get text command active*/
         gtButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -195,6 +192,7 @@ public class GUI {
             }
         });
 
+        /*Sets send keys command active*/
         sendKeysButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,6 +202,7 @@ public class GUI {
             }
         });
 
+        /*Ends the send keys command and sets everything else to not active*/
         endSendKeysButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -246,12 +245,13 @@ public class GUI {
     }
 
     public static void main(String[] args) throws IOException, SAXException {
-        //if(JOptionPane.CANCEL_OPTION)
+        /*URL input, defaults to google if canceled*/
         URL = JOptionPane.showInputDialog("Enter URL");
-        if (URL == null)
-        {
+        if (URL == null) {
             URL = "https://www.google.com/";
         }
+
+        /*Opens the browser and the GUI*/
         view = new View();
         view.openView(args);
 

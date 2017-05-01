@@ -5,9 +5,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -51,6 +48,7 @@ public class Browser extends Region
         webEngine.load(gui.URL);
 
 
+        /*Event listener that gets added to each web element*/
         final EventListener listener = new EventListener() {
             public void handleEvent(Event ev) {
                 if(gui.isRecording) {
@@ -60,9 +58,9 @@ public class Browser extends Region
                     if (element.getAttribute("id") != null) {
                         insert = beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + "\n" + sleepCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");"  + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {
@@ -73,9 +71,9 @@ public class Browser extends Region
                     } else if (element.getAttribute("name") != null) {
                         insert = "\n" + beginningCommand + "//*[@name='" + element.getAttribute("name") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + "\n" + sleepCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");" + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {
@@ -86,9 +84,9 @@ public class Browser extends Region
                     } else if (element.getAttribute("class") != null) {
                         insert = "\n" + beginningCommand + "//*[@class='" + element.getAttribute("class") + "']" + endCommand;
                         if(gui.dotClick)
-                            insert = insert + clickCommand + "\n" + sleepCommand;
+                            insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");" + "\n" + sleepCommand;
+                            insert = "System.out.println(" + insert + getTextCommand + ");" + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {
@@ -103,6 +101,7 @@ public class Browser extends Region
             }
         };
 
+        /*Adds event listeners to web elements*/
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                 if(newValue == Worker.State.SUCCEEDED) {
@@ -128,20 +127,6 @@ public class Browser extends Region
         getChildren().add(browser);
     }
 
-    public void loadBrowser(String url)
-    {
-        System.out.println(url);
-        webEngine.load(url);
-        webEngine.reload();
-        //getChildren().add(browser);
-    }
-
-    private Node createSpacer()
-    {
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        return spacer;
-    }
 
     @Override
     protected void layoutChildren()
