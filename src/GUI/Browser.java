@@ -56,11 +56,11 @@ public class Browser extends Region
                     String insert;
 
                     if (element.getAttribute("id") != null) {
-                        insert = beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
+                        insert = "\n" + beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand;
                         if(gui.dotClick)
                             insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");"  + sleepCommand;
+                            insert = "\nSystem.out.println(" + beginningCommand + "//*[@id='" + element.getAttribute("id") + "']" + endCommand + getTextCommand + ");" + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {
@@ -73,7 +73,7 @@ public class Browser extends Region
                         if(gui.dotClick)
                             insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");" + sleepCommand;
+                            insert = "\nSystem.out.println(" + beginningCommand + "//*[@name='" + element.getAttribute("name") + "']" + endCommand + getTextCommand + ");" + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {
@@ -86,7 +86,7 @@ public class Browser extends Region
                         if(gui.dotClick)
                             insert = insert + clickCommand + sleepCommand;
                         else if(gui.dotGetText)
-                            insert = "System.out.println(" + insert + getTextCommand + ");" + sleepCommand;
+                            insert = "\nSystem.out.println(" + beginningCommand + "//*[@class='" + element.getAttribute("class") + "']" + endCommand + getTextCommand + ");" + sleepCommand;
                         else if(gui.dotSendKeys)
                             insert = insert + sendKeysCommand;
                         try {

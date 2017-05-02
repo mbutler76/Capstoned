@@ -38,32 +38,32 @@ public class GUI {
     JFileChooser chooser = new JFileChooser();
 
     public static String URL = "";
-    public final String firstCode = "\timport org.openqa.selenium.By;\n" +
-            "\timport org.openqa.selenium.WebDriver;\n" +
-            "\timport org.openqa.selenium.chrome.ChromeDriver;\n" +
-            "\timport org.openqa.selenium.chrome.ChromeOptions;\n" +
-            "\t\n" +
-            "\tpublic class SeleniumMain {\n" +
+    public final String firstCode = "import org.openqa.selenium.By;\n" +
+            "import org.openqa.selenium.WebDriver;\n" +
+            "import org.openqa.selenium.chrome.ChromeDriver;\n" +
+            "import org.openqa.selenium.chrome.ChromeOptions;\n" +
+            "\n" +
+            "public class TO_REPLACE {\n" +
             "\n" +
             "\tpublic static WebDriver driver;\n" +
             "\tstatic ChromeOptions options;\n" +
-            "\t\n" +
+            "\n" +
             "    public static void main(String[] args) throws InterruptedException {\n" +
             "\n" +
             "    \tSystem.setProperty(\"webdriver.chrome.driver\", System.getProperty(\"user.dir\") + \"/src/main/resources/chromedriver\");\n" +
-            "    \t\n" +
-            "       //Create a new instance of Chrome Browser\n" +
-            "       driver = new ChromeDriver();\n" +
-            "       \n" +
-            "       //Open the URL in Chrome browser\n" +
-            "       driver.get(\"";
+            "\n" +
+            "    \t//Create a new instance of Chrome Browser\n" +
+            "    \tdriver = new ChromeDriver();\n" +
+            "\n" +
+            "    \t//Open the URL in Chrome browser\n" +
+            "    \tdriver.get(\"";
     public final String secondCode = "\");\n" +
             "\n" +
-            "       Thread.sleep(3000);\n" +
-            "       //Get the current page URL and store the value in variable 'str'\n" +
-            "       String str = driver.getCurrentUrl();\n" +
-            "       System.out.println(str);\n" +
-            "       ///////////////////////////////////////////////\n";
+            "    \tThread.sleep(3000);\n" +
+            "    \t//Get the current page URL and store the value in variable 'str'\n" +
+            "    \tString str = driver.getCurrentUrl();\n" +
+            "    \tSystem.out.println(str);\n" +
+            "////////////////////AUTO GENERATED///////////////////////////\n";
     public final String endCode = "\ndriver.close();\n}\n}";
     private static View view;
 
@@ -99,9 +99,12 @@ public class GUI {
     }
 
     /*Function to save a file when one is currently open*/
-    public void saveFile() {
+    public void saveFile(String fileName) {
+        String search = "TO_REPLACE";
+
         try {
             String code = textEditor.getText();
+            code = code.replaceAll(search, fileName.substring(0, fileName.length() - 5));
             PrintWriter printWriter = new PrintWriter(selected);
             printWriter.print(code);
             printWriter.close();
@@ -123,7 +126,7 @@ public class GUI {
                 } else {
                     int dialogChoice = JOptionPane.showConfirmDialog(null, "There is already an open file, would you like to save it before opening another?", "File already open", JOptionPane.YES_NO_OPTION);
                     if (dialogChoice == JOptionPane.YES_OPTION) {
-                        saveFile();
+                        saveFile(selected.getName());
                         openFile();
                     } else {
                         openFile();
@@ -146,13 +149,13 @@ public class GUI {
                 }
 
                 if (isFileOpen) {
-                    saveFile();
+                    saveFile(selected.getName());
                 } else {
                     chooser.setSelectedFile(new File("SeleniumTest.java"));
                     int i = chooser.showSaveDialog(saveButton);
                     if (i == chooser.APPROVE_OPTION) {
                         selected = chooser.getSelectedFile();
-                        saveFile();
+                        saveFile(selected.getName());
                     }
                 }
             }
